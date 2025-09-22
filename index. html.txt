@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Anecdote App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            transition: background-color 0.5s ease-in-out;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin 60s linear infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+    <!-- Main App Container -->
+    <div class="w-full max-w-sm mx-auto bg-white rounded-3xl shadow-2xl p-6 flex flex-col items-center transition-all duration-300 transform scale-100 hover:scale-105">
+        <!-- App Header -->
+        <h1 class="text-3xl font-bold text-slate-800 mb-2 text-center">Your Daily Smile</h1>
+        <p class="text-slate-500 mb-6 text-center text-sm">A little moment of joy, just for you.</p>
+
+        <!-- Logo -->
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 flex items-center justify-center shadow-lg transform transition-transform duration-500 hover:scale-110 mb-6">
+            <span class="text-5xl animate-spin-slow">🌞</span>
+        </div>
+
+        <!-- AdSense Placeholder - This is where your ad banner will go -->
+        <div class="w-full h-24 bg-slate-200 rounded-xl mb-6 flex items-center justify-center border-dashed border-2 border-slate-300">
+            <p class="text-slate-400 text-sm font-semibold text-center">Your Google AdSense Banner Here</p>
+        </div>
+
+        <!-- Topic Input Section -->
+        <div class="w-full mb-4">
+            <h2 class="text-slate-600 text-base font-semibold text-center mb-2">Enter your topic:</h2>
+            <input id="topic-input" type="text" placeholder="e.g., Cooking mishaps, road trips" class="w-full p-2 rounded-lg border-2 border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center">
+        </div>
+
+        <!-- Anecdote Card -->
+        <div id="anecdote-card" class="w-full rounded-2xl border border-indigo-200 shadow-inner transition-all duration-500 ease-in-out">
+            <div id="anecdote-text-container" class="bg-indigo-50 text-slate-700 p-6 rounded-2xl text-lg italic text-center min-h-[150px] flex items-center justify-center">
+                "Loading a tiny bit of joy..."
+            </div>
+        </div>
+        
+        <!-- AdSense Placeholder - This is where your ad banner will go -->
+        <div class="w-full h-24 bg-slate-200 rounded-xl mt-6 mb-6 flex items-center justify-center border-dashed border-2 border-slate-300">
+            <p class="text-slate-400 text-sm font-semibold text-center">Your Google AdSense Banner Here</p>
+        </div>
+
+        <!-- Button to get a new anecdote -->
+        <button id="next-button" class="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 mt-6 mb-4">
+            Next Smile, Please!
+        </button>
+
+        <!-- AdSense Placeholder - This is where your ad banner will go -->
+        <div class="w-full h-24 bg-slate-200 rounded-xl mb-6 flex items-center justify-center border-dashed border-2 border-slate-300">
+            <p class="text-slate-400 text-sm font-semibold text-center">Your Google AdSense Banner Here</p>
+        </div>
+
+        <!-- Social Media Sharing Buttons -->
+        <div class="flex space-x-4">
+            <button id="share-facebook" class="p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </button>
+            <button id="share-x" class="p-3 bg-black rounded-full hover:bg-gray-800 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M22 4s-.7 2.1-2 3.4c-1.6 1.8-3.9 2.3-6.1 2.5-1.1.1-2.2 0-3.3-.2-1.2-.2-2.3-.5-3.4-.9C5.4 8.7 4.2 8.4 3 8.1c-.6-.2-1.2-.3-1.8-.4-1.3-.2-2.6 0-3.9.4-.9.2-1.8.5-2.7.9-.7.4-1.4.8-2 1.3-1.4 1.1-2.7 2.4-3.7 3.8-1 1.4-1.6 2.9-2 4.5-.4 1.6-.5 3.3-.3 5.1.2 1.8.7 3.6 1.5 5.3s1.9 3.3 3.3 4.8c1.4 1.5 3 2.8 4.7 3.9 1.7 1.1 3.5 2 5.3 2.6s3.6.9 5.5.9c.9 0 1.8-.1 2.7-.2 1.1-.1 2.1-.3 3.1-.6 1.1-.3 2.1-.7 3.1-1.2 1-.5 2-1.1 2.9-1.8 1.4-1.2 2.7-2.6 3.7-4.1 1-1.5 1.6-3.2 2-5s.4-3.5.2-5.4c-.2-1.8-.7-3.6-1.5-5.4s-1.9-3.4-3.3-4.9c-1.4-1.6-3-2.8-4.7-3.9z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript for app logic -->
+    <script>
+        const anecdotesByTopic = {
+            "everyday_life": [
+                "I once spent a solid ten minutes searching for my glasses only to find them perched on top of my head like a tiny crown. The worst part was that I had already asked three different people if they had seen them, explaining how frustrating it was to be unable to see anything. The moment of silent realization was more humbling than any grand life lesson.",
+                "My phone charger has a secret life. It will be perfectly fine for weeks, but the moment I need to charge my phone in a hurry, it decides to stop working. I'll unplug it, flip it, spin it around, and perform a series of dances, only for it to suddenly and mysteriously start working perfectly again when I've given up hope.",
+                "There is a universal law that states the moment you finally find a comfortable position on the couch, your cat will appear and demand to sit in that exact spot. You will spend the next hour trying to shift without waking them, eventually giving up and accepting your new life as a human footrest.",
+                "I was convinced that my remote control was haunted because it would disappear from the coffee table and reappear in the most random places, like the refrigerator or under a pillow. Turns out, my toddler was just a very sneaky magician, and our home was her stage. Now I just applaud her show and find the remote later."
+            ],
+            "family": [
+                "My family has an ongoing competition to see who can finish the most leftovers from the refrigerator. It's a silent battle of attrition, but the moment a new dish is brought out, the entire family turns into a team, working together to make sure nothing goes to waste. We may not have a lot of trophies, but we do have a very clean fridge.",
+                "My dad has a specific way of stacking the dishwasher that he believes is the 'only' way. Anyone else who tries is met with a quiet, judgmental sigh. We all know that as soon as we leave the kitchen, he’ll unstack everything and do it over again. It’s not a chore for him, it’s a form of therapy.",
+                "There’s a special kind of love that only a sibling can understand. It's the kind where you can be arguing one moment, and then team up to prank your parents the next. We fight over everything, but the moment we have a common enemy (like the last cookie), we become the strongest team in the world.",
+                "My grandmother's house always smells like freshly baked cookies. She keeps a batch in the freezer and bakes one for each grandchild when we visit. She'll tell us to 'just have one,' but by the end of the night, the whole batch is gone, and we're all a little happier and a lot more full."
+            ],
+            "friendship": [
+                "A true friend is someone you can sit in a room with for hours, in complete silence, and both of you will feel perfectly comfortable. It's not awkward silence, it's just a shared understanding that you don't need words to enjoy each other's company. Until one of you suddenly blurts out something completely random.",
+                "I have a friend who is an expert at finding things I've lost. He has a sixth sense for misplacing things, and he'll be able to tell me exactly where my phone is, even if I'm not in the room. He says it's because he has a 'map of my chaos' in his head. I just call it a miracle.",
+                "Friendship is the only place where you can send a text that just says 'potato' and your friend knows exactly what you mean. We laugh at nonsense together, not because the word is funny, but because it belongs to our little world. Years later, we’ll forget why 'potato' was ever funny, but we’ll still smile every time we hear it. That’s the magic of being human — we turn ordinary words into lifelong treasures.",
+                "A true friend is the one who laughs with you when you spill coffee on your shirt, and then spills some on theirs just so you don’t feel alone. It’s a clumsy, human kind of kindness, and it always turns disaster into a story worth retelling. We don’t stay close because everything goes perfectly — we stay close because we laugh when it doesn’t. And somehow, those moments mean more than all the smooth ones."
+            ],
+            "technology": [
+                "My phone has an uncanny ability to know when I'm about to go to bed. It'll stay at 20% all day, but the second I lay down and close my eyes, it will suddenly drop to 1% and start beeping frantically. It's a very dramatic reminder that it's time to charge it.",
+                "I'm convinced that my printer is a sentient being with a vendetta against me. It will work perfectly for months, but the moment I have to print an important document for work, it decides to go on strike. It will flash its lights, make strange noises, and refuse to print until I've pleaded with it for a good five minutes. It's the most high-maintenance relationship I've ever had.",
+                "I once tried to impress my family with my new smart speaker, but it just kept responding to a TV commercial. We spent ten minutes trying to get it to turn on the lights, but it was too busy adding 'extra creamy mayonnaise' to our shopping list. It was a good reminder that sometimes, the simplest things are the best.",
+                "My autocorrect has a very specific sense of humor. It will change the most normal words into something completely ridiculous, turning a simple text into a comedic masterpiece. It’s like a tiny, mischievous ghost living inside my phone, and it always makes me laugh."
+            ]
+        };
+
+        const anecdoteCard = document.getElementById('anecdote-card');
+        const anecdoteTextContainer = document.getElementById('anecdote-text-container');
+        const nextButton = document.getElementById('next-button');
+        const shareFacebookBtn = document.getElementById('share-facebook');
+        const shareXBtn = document.getElementById('share-x');
+        const topicInput = document.getElementById('topic-input');
+
+        let currentAnecdote = "";
+
+        // Function to get a random anecdote from the default topic
+        function getRandomAnecdote() {
+            const anecdotesForTopic = anecdotesByTopic["everyday_life"];
+            const randomIndex = Math.floor(Math.random() * anecdotesForTopic.length);
+            return anecdotesForTopic[randomIndex];
+        }
+
+        // Function to update the anecdote displayed on the page
+        function updateAnecdote() {
+            anecdoteTextContainer.style.opacity = 0;
+            anecdoteTextContainer.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                const requestedTopic = topicInput.value.trim();
+                if (requestedTopic !== "") {
+                    currentAnecdote = `Thank you for the suggestion! We'll work on an anecdote about "${requestedTopic}". Check back soon!`;
+                    topicInput.value = ""; // Clear the input after displaying the message
+                } else {
+                    currentAnecdote = getRandomAnecdote();
+                }
+                anecdoteTextContainer.textContent = currentAnecdote;
+                anecdoteTextContainer.style.opacity = 1;
+                anecdoteTextContainer.style.transform = 'scale(1)';
+            }, 300); // Wait for the fade-out transition to complete
+        }
+
+        // Function to handle social media sharing
+        function shareAnecdote(platform) {
+            if (!currentAnecdote || currentAnecdote.startsWith("Thank you")) return; // Don't share if there's no anecdote or it's a thank you message
+
+            const encodedText = encodeURIComponent(`A little moment of joy for you! 😊\n\n"${currentAnecdote}"\n\n#DailySmileApp #Humor #FeelGood`);
+            let url = "";
+
+            switch (platform) {
+                case 'facebook':
+                    // Uses the Facebook Sharer. Note that the 'u' parameter is the URL to share.
+                    url = `https://www.facebook.com/sharer/sharer.php?quote=${encodedText}`;
+                    break;
+                case 'x':
+                    url = `https://twitter.com/intent/tweet?text=${encodedText}`;
+                    break;
+            }
+
+            if (url) {
+                window.open(url, '_blank', 'width=600,height=400');
+            }
+        }
+        
+        // Display an anecdote when the page loads
+        document.addEventListener('DOMContentLoaded', updateAnecdote);
+
+        // Add event listeners to the buttons
+        nextButton.addEventListener('click', updateAnecdote);
+        shareFacebookBtn.addEventListener('click', () => shareAnecdote('facebook'));
+        shareXBtn.addEventListener('click', () => shareAnecdote('x'));
+    </script>
+</body>
+</html>
